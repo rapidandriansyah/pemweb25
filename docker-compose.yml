@@ -2,18 +2,17 @@ services:
   php:
     build:
       context: ./php
-    container_name: pemweb_php
+    container_name: dev_php
     volumes:
       - ./src:/var/www/html
     environment:
-      - PROJECT_NAME=pemweb
+      - PROJECT_NAME=dev
     depends_on:
       - db
 
   nginx:
-    build:
-      context: ./nginx
-    container_name: pemweb_nginx
+    image: nginx:alpine
+    container_name: dev_nginx
     ports:
       - "443:443"
       - "80:80"
@@ -24,13 +23,14 @@ services:
     depends_on:
       - php
 
+
   db:
     image: mariadb:10.11
-    container_name: pemweb_db
+    container_name: dev_db
     ports:
       - "13306:3306"
     environment:
-      MYSQL_DATABASE: pemweb
+      MYSQL_DATABASE: dev
       MYSQL_ROOT_PASSWORD: p455w0rd
     volumes:
       - ./db/conf.d:/etc/mysql/conf.d
