@@ -1,0 +1,287 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "My API",
+        "description": "This Is API Documentation for My Application",
+        "termsOfService": "https://dev.test/terms",
+        "contact": {
+            "name": "API Support",
+            "email": "support@example.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost/api",
+            "description": "API Server"
+        },
+        {
+            "url": "https://dev.test",
+            "description": "Local API Server"
+        }
+    ],
+    "paths": {
+        "/laporans": {
+            "get": {
+                "tags": [
+                    "Laporans"
+                ],
+                "summary": "Get all laporans",
+                "operationId": "354b4fd034cf72e5d9f3cca6bcadb811",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Laporan"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Laporans"
+                ],
+                "summary": "Create a new laporan",
+                "operationId": "dfc6a9893b396c1eef945224f4944b7c",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Laporan"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Laporan created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Laporan"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ]
+            }
+        },
+        "/laporans/{id}": {
+            "get": {
+                "tags": [
+                    "Laporans"
+                ],
+                "summary": "Get a single laporan by ID",
+                "operationId": "9e3eafddacaff2bc482759d7de2f3c42",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Laporan"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Laporan not found"
+                    }
+                },
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Laporans"
+                ],
+                "summary": "Update an existing laporan",
+                "operationId": "271a4dc629025c90fe16e358e4e0661d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Laporan"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Laporan updated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Laporan"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Laporan not found"
+                    }
+                },
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Laporans"
+                ],
+                "summary": "Delete a laporan",
+                "operationId": "5b42a61e37e20a8714b2b24646e152e0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Laporan deleted"
+                    },
+                    "404": {
+                        "description": "Laporan not found"
+                    }
+                },
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Laporan": {
+                "title": "Laporan",
+                "required": [
+                    "id",
+                    "judul",
+                    "description",
+                    "kategori",
+                    "lokasi",
+                    "status"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "judul": {
+                        "type": "string",
+                        "example": "Jalan Berlubang di Perempatan"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Terdapat lubang cukup dalam yang membahayakan pengendara motor."
+                    },
+                    "kategori": {
+                        "type": "string",
+                        "enum": [
+                            "berlubang",
+                            "rusak",
+                            "ambles"
+                        ],
+                        "example": "berlubang"
+                    },
+                    "lokasi": {
+                        "type": "string",
+                        "example": "Jl. Sudirman No. 10, Tangerang"
+                    },
+                    "foto": {
+                        "type": "string",
+                        "example": "01K0PRVTWVH53C88GP9DZP9R0R.jpg",
+                        "nullable": true
+                    },
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "parah",
+                            "biasa"
+                        ],
+                        "example": "parah"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-07-21T10:00:00Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-07-21T10:00:00Z"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "ApiKeyAuth": {
+                "type": "apiKey",
+                "name": "X-API-KEY",
+                "in": "header"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Laporans",
+            "description": "API Endpoints for Laporan Management"
+        }
+    ]
+}
